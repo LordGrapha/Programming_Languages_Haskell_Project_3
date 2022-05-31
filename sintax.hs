@@ -9,7 +9,7 @@ data Proposicion =
   | Disyuncion Proposicion Proposicion
   | Implicacion Proposicion Proposicion
   | Equivalencia Proposicion Proposicion
-  deriving Show
+  deriving (Show, Eq)
 
 (¬) :: Proposicion -> Proposicion
 (¬) prop = Negacion prop
