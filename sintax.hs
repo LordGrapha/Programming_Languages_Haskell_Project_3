@@ -1,5 +1,3 @@
-module Sintax where
-
 -- ------------------------------------------------------------------
 data Proposicion = 
     Constante Bool 
