@@ -21,9 +21,9 @@ infixl 7 /\
 prop1 \/ prop2 = Disyuncion prop1 prop2
 infixl 6 \/
 
-(>>) :: Proposicion -> Proposicion -> Proposicion
-prop1 >> prop2 = Implicacion prop1 prop2
-infixr 5 >>
+(>=>) :: Proposicion -> Proposicion -> Proposicion
+prop1 >=> prop2 = Implicacion prop1 prop2
+infixr 5 >=>
 
 (<=>) :: Proposicion -> Proposicion -> Proposicion
 prop1 <=> prop2 = Equivalencia prop1 prop2
