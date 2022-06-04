@@ -9,9 +9,9 @@ data Proposicion =
   | Equivalencia Proposicion Proposicion
   deriving (Show, Eq)
 
-(~) :: Proposicion -> Proposicion
-(~) prop = Negacion prop
-infix ~
+(¬) :: Proposicion -> Proposicion
+(¬) prop = Negacion prop
+infix ¬
 
 (/\) :: Proposicion -> Proposicion -> Proposicion
 prop1 /\ prop2 = Conjuncion prop1 prop2
