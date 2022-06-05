@@ -36,9 +36,9 @@ simpl (Negacion p)      =
     conjuncion = isConj p
   in
     if disyuncion
-      then Conjuncion (Negacion (getFirst p)) (Negacion (getSecond p)) -- 1. DeMorgan ¬(P ∨ Q) ≡ ¬P ∧ ¬Q
+      then simpl (Conjuncion (Negacion (getFirst p)) (Negacion (getSecond p))) -- 1. DeMorgan ¬(P ∨ Q) ≡ ¬P ∧ ¬Q
     else if conjuncion
-      then Disyuncion (Negacion (getFirst p)) (Negacion (getSecond p)) -- 2. DeMorgan ¬(P ∧ Q) ≡ ¬P ∨ ¬Q
+      then simpl (Disyuncion (Negacion (getFirst p)) (Negacion (getSecond p))) -- 2. DeMorgan ¬(P ∧ Q) ≡ ¬P ∨ ¬Q
     else if isNeg p 
       then simpl p -- 3. Doble negacion ¬¬P ≡ P
     else
@@ -55,12 +55,12 @@ simpl (Conjuncion p q)  =
         then 
           if getConst q == True 
             then simpl p -- 6. Neutro P ∧ V0 ≡ P
-          else q -- 7. Dominacion P ∧ F0 ≡ F0
+          else simpl q -- 7. Dominacion P ∧ F0 ≡ F0
       else if isConst p 
         then 
           if getConst p == True 
             then simpl q -- 8. Neutro V0 ∧ Q ≡ Q
-          else p -- 9. Dominacion F0 ∧ Q ≡ F0
+          else simpl p -- 9. Dominacion F0 ∧ Q ≡ F0
       else simpl p /\ simpl q
 simpl (Disyuncion p q) = 
   let 
@@ -73,10 +73,11 @@ simpl (Disyuncion p q) =
         then 
           if getConst q == False 
             then simpl p -- 11. Neutro P ∨ F0 ≡ P
-          else q -- 12. Dominacion P ∨ V0 ≡ V0
+          else simpl q -- 12. Dominacion P ∨ V0 ≡ V0
       else if isConst p 
         then 
           if getConst p == False 
             then simpl q -- 13. Neutro F0 ∨ Q ≡ Q
-          else p -- 14. Dominacion V0 ∨ Q ≡ V0
+          else simpl p -- 14. Dominacion V0 ∨ Q ≡ V0
       else simpl p \/ simpl q
+simpl (Equivalencia prop1 prop2) = simpl prop1 <=> simpl prop2

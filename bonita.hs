@@ -38,8 +38,8 @@ bonita prop =
       (if prioridad (getSecond prop) < prioridad prop then "(" ++ bonita (getSecond prop) ++ ")" else bonita (getSecond prop)) 
   else if isEqui prop
     then
-      bonita prop1 
+      bonita (getFirst prop) 
       ++ " <=> " ++ 
       (if prioridad (getSecond prop) > prioridad prop then bonita (getSecond prop) else "(" ++ bonita (getSecond prop) ++ ")")
   else
-    ""   
+    ""    
